@@ -1,0 +1,36 @@
+<!-- Edition Mode -->
+<form id="promo_form" name="promo_form" ng-class="{ 'blurred': vm.selectorOpen == true }" ng-submit="vm.update( )" class="promo_form tq_floating_labels">
+<!-- For Testing Only -->
+<!-- <pre>{{vm.data.promo | json}}</pre> -->
+<!-- For Testing Only -->
+
+	<fieldset>
+		<legend>Promotion</legend>
+
+		<div class="icon">
+			<label class="cd-label" ng-class="{ 'float': vm.base.data.promo.description, 'label_error': promo_form.promo_description.$dirty && promo_form.promo_description.$error.required }" for="promo_description">
+				Description
+                <span ng-show="promo_form.promo_description.$dirty && promo_form.promo_description.$error.required"> required</span>
+			</label>
+            <input id="promo_description" name="promo_description" class="book" ng-class="{ 'error': promo_form.promo_description.$dirty && promo_form.promo_description.$error.required }" ng-model='vm.base.data.promo.description' type="text"  tabindex="10" required>
+	    </div> 
+
+		<div class="icon">
+			<label class="cd-label" ng-class="{ 'float': vm.base.data.promo.detail, 'label_error': promo_form.promo_detail.$dirty && promo_form.promo_detail.$error.required }" for="promo_detail">
+				Details
+                <span ng-show="promo_form.promo_detail.$dirty && promo_form.promo_detail.$error.required"> required</span>
+			</label>
+ 			<textarea id="promo_detail" name="promo_detail" class="edit" ng-class="{ 'error': promo_form.promo_detail.$dirty && promo_form.promo_detail.$error.required }" ng-model='vm.base.data.promo.detail' tabindex="20" required></textarea>
+	    </div> 
+
+		<legend>Logo</legend>
+		<div class="icon">
+            <input filepicker id='promo_img_uri' name='promo_img_uri'  data-fp-container="window" ng-model='vm.base.data.promo.img_uri' type="filepicker-dragdrop" data-fp-apikey="AhTgLagciQByzXpFGRI0Az" data-fp-mimetypes="image/*" on-success="vm.pickerOnSuccess(event.fpfile)" />
+	    </div> 
+        <img src="{{ vm.base.data.promo.img_uri }}" data-fp-pixel-round="100" data-fp-on-resize="all" width="100%" alt="{{vm.base.data.promo.description}}">
+	</fieldset>
+
+	<div>
+      	<input type="submit" value="Save">
+    </div>
+</form>

@@ -1,0 +1,82 @@
+<div class="trivia_challenges_list">
+    <div id="trivia_challenge_selector" class="cs-select cs-skin-underline" tabindex="0">
+        <span id='challenge_selector_placeholder' class="cs-placeholder" ng-click='vm._toggleSelect( )'>
+            {{vm.placeHolderText}}
+        </span>
+
+        <div class="cs-options ">
+            <ul>
+                <li class='challenge_list_create_new_option' ng-click="vm.clickedChallengeList( -10 )" data-value='-10' id='option_-10' data-option="">
+                    <span>Create a new Challenge <i class='fa fa-plus'></i></span>
+                </li>
+                <li ng-repeat='challenge in vm.list' ng-click="vm.clickedChallengeList( challenge.challenge_seqid )" data-value='{{challenge.challenge_seqid}}' 
+                    id='option_{{challenge.challenge_seqid}}' data-option="">
+                    <span>{{challenge.description}}</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Edition Mode -->
+<form id="trivia_form" name="trivia_form" ng-submit="vm.update( )"  class="trivia_form tq_floating_labels">
+	<fieldset>
+		<legend>Challenge</legend>
+
+        <!-- Challenge Text -->
+		<div class="icon">
+			<label class="cd-label" ng-class="{ 'float': vm.base.data.challenge.description, 'label_error': trivia_form.challenge_description.$dirty && trivia_form.challenge_description.$error.required }" for="challenge_description">
+				Question
+                <span ng-show="trivia_form.challenge_description.$dirty && trivia_form.challenge_description.$error.required"> required</span>
+			</label>
+            <input id='challenge_description_input' class="" ng-class="{ 'error': trivia_form.challenge_description.$dirty && trivia_form.challenge_description.$error.required }" ng-model='vm.base.data.challenge.description' id="challenge_description" name="challenge_description" type="text"  tabindex="10" required>
+	    </div> 
+
+	</fieldset>
+	<fieldset>
+		<legend>Options<small > (Order is not important - Remember to check the right answer)</small></legend>
+
+        <!-- Question Options -->
+        <div class="icon row" ng-repeat='option in vm.base.data.responses'>
+            <!-- Option Text -->
+            <div class="col-xs-10 col-sm-11 icon_div">
+                <div class="box icon_div">
+                    <label class="cd-label" ng-class="{ 'float': option.description, 'label_error': trivia_form.challenge_description.$dirty && trivia_form.tr_seqid_{{option.trivia_responses_seqid}}.$error.required }" for="tr_seqid_{{option.trivia_responses_seqid}}">
+                        Option {{$index + 1}}
+                        <span ng-show="trivia_form.tr_seqid_{{option.trivia_responses_seqid}}.$dirty && trivia_form.tr_seqid_{{option.trivia_responses_seqid}}.$error.required"> required</span>
+                    </label>
+                    <input ng-class="{ 'error': trivia_form.tr_seqid_{{option.trivia_responses_seqid}}.$dirty && trivia_form.tr_seqid_{{option.trivia_responses_seqid}}.$error.required }" ng-model='option.description' id="tr_seqid_{{option.trivia_responses_seqid}}" name="tr_seqid_{{option.trivia_responses_seqid}}" type="text"  tabindex="{{10 * ( $index + 1)}}" required>
+                </div>
+            </div>
+            <!-- Option Grade, Right Answer or not-->
+            <div class="col-xs-2 col-sm-1 icon_div">
+                <div class="box icon_div">
+            		<div class="trivia_form_grade icon_div">
+                        <input type="radio" class="grade_option_input radio"  ng-model="vm.base.data.grade" ng-value="option.trivia_responses_seqid" name="rightAnswer" id="grade_{{trivia_responses_seqid}}"/>
+            	    </div> 
+                </div>
+            </div>
+        </div>
+	</fieldset>
+	<fieldset>
+		<legend>Question Categories</legend>
+        <ul class="category_list">
+            <div ng-repeat='category in vm.base.form_extra.select_category' id="{{category.challenge_category_seqid}}_parent" class="category_list_element" >
+                <li ng-style="category.checked === true && { backgroundColor: category.background_color }" id="{{category.challenge_category_seqid}}" ng-click="vm.toggleCategory( category )" class="checkbox {{ category.fa_class }} ng-class:{ 'is-checked': category.checked }">
+                </li>
+                <div class="category_list_title" >
+                    {{category.category_title}}
+                </div>
+            </div>
+        </ul>
+	</fieldset>
+
+	<div>
+      	<input type="submit" value="Save">
+    </div>
+<!-- For Testing Only -->
+<!-- <pre>{{vm.base | json}}</pre> -->
+<!-- For Testing Only -->
+</form>
+<script >
+</script>

@@ -1,0 +1,76 @@
+<form id="tr_mgmt_form" name="tr_mgmt_form" ng-submit="vm.update( )" class="cd-form floating-labels">
+<!-- For Testing Only -->
+<!-- <pre>{{ vm.base.data }}</pre> -->
+<!-- For Testing Only -->
+
+	<fieldset>
+		<legend>My advertised website</legend>
+
+        <!-- Url -->
+		<div class="icon">
+			<label class="cd-label float" ng-class="{ 'label_error': tr_mgmt_form.default_url.$dirty && tr_mgmt_form.default_url.$error.required }" for="default_url">
+				Url ( Example: http://yoursite.com )
+                <span ng-show="tr_mgmt_form.default_url.$dirty && tr_mgmt_form.default_url.$error.required"> required</span>
+			</label>
+            <input id="default_url" name="default_url" ng-class="{ 'error': tr_mgmt_form.default_url.$dirty && tr_mgmt_form.default_url.$error.required }" ng-model='vm.base.data.default_url' type="url"  tabindex="10" required>
+	    </div> 
+	</fieldset>
+
+	<fieldset>
+		<legend>Demographics</legend>
+
+
+        <!-- Gender -->
+	    <div class="icon">
+            <label class="cd-label float">
+    			Gender
+    		</label>
+			<ul class="cd-form-list">
+				<li ng-repeat="gender in vm.base.form_extra.select_gender">
+					<input type="radio" ng-model="vm.base.data.gender" ng-value="gender.value" name="gender" id="{{gender.value}}">
+                    <label for="{{gender.value}}">
+                        <span class="fa-stack">
+                            <i class="fa {{ gender.icon }} fa-stack-1x"></i>
+                        </span>
+                        {{ gender.description }}
+                    </label>
+				</li>
+			</ul>
+		</div>
+
+        <!-- Age Range -->
+		<div class="cd-form-list">
+            <label class="cd-label float">
+    			Minimum Age - {{ vm.base.data.age_youngest }}
+    		</label>
+            <input ng-model='vm.base.data.age_youngest' type='range' min='0' max='{{vm.base.data.age_oldest}}' class="range blue"/>
+	    </div> 
+	</fieldset>
+
+	<fieldset>
+		<div class="cd-form-list">
+            <label class="cd-label float">
+    			Maximum Age - {{ vm.base.data.age_oldest }}
+    		</label>
+            <input ng-model='vm.base.data.age_oldest' type='range' min='{{vm.base.data.age_youngest}}' max='120' class="range blue"/>
+	    </div> 
+	</fieldset>
+
+	<fieldset>
+		<legend>Location</legend>
+		<div>
+            <label class="cd-label float">
+    			Country
+    		</label>
+			<p class="cd-select icon">
+				<select class="budget">
+					<option ng-repeat="country in vm.base.form_extra.select_country" ng-value="country.country_id">{{ country.country_name }}</option>
+				</select>
+			</p>
+		</div> 
+	</fieldset>
+
+	<div>
+      	<input type="submit" value="Save">
+    </div>
+</form>

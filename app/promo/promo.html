@@ -1,0 +1,63 @@
+<div class="promotions_list">
+    <div id="promotion_selector" class="cs-select cs-skin-underline" tabindex="0">
+        <span id='option_selector_placeholder' class="cs-placeholder" ng-click='vm._toggleSelect( )'>
+            {{vm.placeHolderText}}
+        </span>
+
+        <div class="cs-options ">
+            <ul>
+                <li class='options_list_create_new_option' ng-click="vm.clickedOptionList( -10 )" data-value='-10' id='option_-10' data-option="">
+                    <span>Create a new Promotion <i class='fa fa-plus'></i></span>
+                </li>
+                <li ng-repeat='promo in vm.list' ng-click="vm.clickedOptionList( promo.promo_seqid )" data-value='{{promo.promo_seqid}}' 
+                    id='option_{{promo.promo_seqid}}' data-option="">
+                    <span>{{promo.description}}</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!--  ng-if='vm.base.data.promo.promo_seqid != -10' -->
+<div class="tabs tabs-style-fillup" ng-class="{ 'blurred': vm.selectorOpen == true }">
+	<nav>
+		<ul>
+			<li><a href="" class="icon icon-home"><span>Basic</span></a></li>
+			<li><a href="" class="icon icon-tools"><span>Settings</span></a></li>
+			<li><a href="" class="icon icon-gift"><span>Preview <i class='fa fa-wrench'></i></span></a></li>
+			<li><a href="" class="icon icon-display"><span>Stats</span></a></li>
+		</ul>
+	</nav>
+	<div class="content-wrap">
+		<section id="section-iconfall-1">
+    		<p>Basic Info</p>
+            <div ng-include="'promo/partial_basic.html'"></div>
+        </section>
+		<section id="section-iconfall-2">
+    		<p>Settings</p>
+            <div ng-include="'promo/partial_settings.html'"></div>
+        </section>
+		<section id="section-iconfall-3">
+    		<p>Preview - Under Construction</p>
+            <div ng-include="'promo/partial_preview.html'"></div>
+        </section>
+		<section id="section-iconfall-4">
+    		<p>Coupons Stats</p>
+            <div ng-include="'promo/partial_stats.html'"></div>
+		</section>
+
+	</div>
+</div>
+<!-- /tabs -->
+
+<!-- If creating a new Record -->
+<!-- <div ng-if='vm.base.data.promo.promo_seqid == -10' ng-include="'promo/partial_basic.html'"></div> -->
+<!-- <div ng-if='vm.base.data.promo.promo_seqid == -10' ng-include="'promo/partial_settings.html'"></div> -->
+
+<script >
+	( function( ) {
+		[ ].slice.call( document.querySelectorAll( '.tabs' ) ).forEach( function( el ) {
+			new CBPFWTabs( el );
+		} );
+
+	} )( );
+</script>

@@ -1,0 +1,109 @@
+<form id="profile_form" name="profile_form" ng-submit="vm.update( )" class="profile_form_style floating-labels">
+
+	<fieldset>
+		<legend>Company Info</legend>
+
+        <!-- First Name -->
+		<div class="icon">
+			<label class="cd-label" ng-class="{ 'float': vm.profile.data.company_name, 'label_error': profile_form.company_name.$dirty && profile_form.company_name.$error.required }" for="company_name">
+				Company Name
+                <span ng-show="profile_form.company_name.$dirty && profile_form.company_name.$error.required"> required</span>
+			</label>
+            <input class="company" ng-class="{ 'error': profile_form.company_name.$dirty && profile_form.company_name.$error.required }" ng-model='vm.profile.data.company_name' id="company_name" name="company_name" type="text" required>
+	    </div> 
+	</fieldset>
+
+	<fieldset>
+		<legend>Contact Info</legend>
+
+        <!-- Salutation -->
+	    <div class="icon">
+            <label class="cd-label float">
+    			Salutation ( {{vm.profile.data.salutation}} )
+    		</label>
+			<ul class="cd-form-list">
+				<li ng-repeat="salutation in vm.profile.form_extra.select_salutation">
+					<input type="radio" ng-model="vm.profile.data.salutation" ng-value="salutation.salutation_label" name="salutation" id="{{salutation.salutation_label}}">
+                    <label for="{{salutation.salutation_label}}">
+                        {{ salutation.full_label }}
+                    </label>
+				</li>
+			</ul>
+		</div>
+
+        <!-- First Name -->
+		<div class="icon">
+			<label class="cd-label" ng-class="{ 'float': vm.profile.data.fname, 'label_error': profile_form.fname.$dirty && profile_form.fname.$error.required }" for="fname">
+				First Name
+                <span ng-show="profile_form.fname.$dirty && profile_form.fname.$error.required"> required</span>
+			</label>
+            <input class="user" ng-class="{ 'error': profile_form.fname.$dirty && profile_form.fname.$error.required }" ng-model='vm.profile.data.fname' id="fname" name="fname" type="text" required>
+	    </div> 
+
+        <!-- Last Name -->
+		<div class="icon">
+			<label class="cd-label" ng-class="{ 'float': vm.profile.data.lname, 'label_error': profile_form.lname.$dirty && profile_form.lname.$error.required }" for="lname">
+				Last Name
+                <span ng-show="profile_form.lname.$dirty && profile_form.lname.$error.required"> required</span>
+			</label>
+            <input class="user" ng-class="{ 'error': profile_form.lname.$dirty && profile_form.lname.$error.required }" ng-model='vm.profile.data.lname' id="lname" name="lname" type="text" required>
+	    </div> 
+
+        <!-- E-Mail -->
+	    <div class="icon">
+			<label class="cd-label" ng-class="{ 'float': vm.profile.data.primary_email, 'label_error': profile_form.primary_email.$dirty && profile_form.primary_email.$error.required }" for="primary_email">
+				E-Mail
+                <span ng-show="profile_form.primary_email.$dirty && profile_form.primary_email.$error.required"> required</span>
+			</label>
+            <input class="email" ng-model='vm.profile.data.primary_email' id="primary_email" name="primary_email" ng-class="{ 'error': profile_form.primary_email.$dirty && profile_form.primary_email.$error.required }" type="text" required>
+	    </div>
+
+        <!-- Phone -->
+	    <div class="icon">
+			<label class="cd-label" ng-class="{ 'float': vm.profile.data.primary_phone, 'label_error': profile_form.primary_phone.$dirty && profile_form.primary_phone.$error.required }" for="primary_phone">
+				Phone
+                <span ng-show="profile_form.primary_phone.$dirty && profile_form.primary_phone.$error.required"> required</span>
+			</label>
+            <input class="phone" ng-model='vm.profile.data.primary_phone' id="primary_phone" name="primary_phone" ng-class="{ 'error': profile_form.primary_phone.$dirty && profile_form.primary_phone.$error.required }" type="text" required>
+	    </div>
+
+        <!-- Language -->
+		<div>
+            <label class="cd-label float">
+                Language
+    		</label>
+			<p class="cd-select icon">
+                <select class='language'
+                    ng-model="vm.profile.data.language"
+                    ng-options="lang.language_seqid as lang.language_label for lang in vm.profile.form_extra.select_language">
+                </select>
+			</p>
+		</div> 
+		<div>
+	      	<input type="submit" value="Save">
+	    </div>
+
+	</fieldset>
+
+<!-- For Testing Only -->
+<!-- <pre>{{ vm.profile.data.language }}</pre> -->
+<!-- For Testing Only -->
+
+<!--
+	<fieldset>
+		<legend>Credentials</legend>
+
+		<div class="icon">
+			<label class="cd-label" ng-class="{ 'float': vm.profile.data.login_userid, 'label_error': profile_form.login_userid.$dirty && profile_form.login_userid.$error.required }" for="login_userid">
+				User Id
+                <span ng-show="profile_form.login_userid.$dirty && profile_form.login_userid.$error.required"> required</span>
+			</label>
+            <input class="login_userid" ng-model='vm.profile.data.login_userid' id="login_userid" name="login_userid" ng-class="{ 'error': profile_form.login_userid.$dirty && profile_form.login_userid.$error.required }" type="text" required>
+	    </div> 
+	</fieldset>
+-->
+</form>
+
+<script>
+
+</script> <!-- Resource jQuery -->

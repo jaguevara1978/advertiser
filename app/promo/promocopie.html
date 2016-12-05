@@ -1,0 +1,164 @@
+<div class="promotions_list">
+    <div id="promotion_selector" class="cs-select cs-skin-underline" tabindex="0">
+        <span id='option_selector_placeholder' class="cs-placeholder" ng-click='vm._toggleSelect( )'>
+            {{vm.placeHolderText}}
+        </span>
+
+        <div class="cs-options ">
+            <ul>
+                <li class='options_list_create_new_option' ng-click="vm.clickedOptionList( -10 )" data-value='-10' id='option_-10' data-option="">
+                    <span>Create a new Promotion <i class='fa fa-plus'></i></span>
+                </li>
+                <li ng-repeat='promo in vm.list' ng-click="vm.clickedOptionList( promo.promo_seqid )" data-value='{{promo.promo_seqid}}' 
+                    id='option_{{promo.promo_seqid}}' data-option="">
+                    <span>{{promo.description}}</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="tabs tabs-style-fillup" ng-class="{ 'blurred': vm.selectorOpen == true }" ng-show='vm.base.data.promo.promo_seqid != -10'>
+	<nav>
+		<ul>
+			<li><a href="" class="icon icon-home"><span>Basic</span></a></li>
+			<li><a href="" class="icon icon-display"><span>Stats</span></a></li>
+			<li><a href="" class="icon icon-gift"><span>Preview</span></a></li>
+			<li><a href="" class="icon icon-tools"><span>Settings</span></a></li>
+		</ul>
+	</nav>
+	<div class="content-wrap">
+		<section id="section-iconfall-1"><p>Basic Info</p></section>
+
+		<section id="section-iconfall-2">
+    		<p>Coupons Stats</p>
+            <form id="promo_stats" name="promo_stats" class="promo_form tq_floating_labels" style='padding: 0'>
+            	<fieldset class='fieldset_tabs'>
+                    <div class='row' style="margin: 0;">
+                        <div class="col-xs-12 col-sm-4" style="margin: 0;" ng-repeat='stat in vm.base.form_extra.stats'>
+                            <div class="box" style="margin: 0;">
+                        		<div class="icon">
+                        			<label class="cd-label float" for="stats_active">{{ stat.stat }}</label>
+                                    <input id="stats_active" name="stats_active" ng-class="stat.stat | lowercase" ng-model='stat.count' type="text" readonly="true">
+                        	    </div>
+                            </div>
+                        </div>
+            	    </div>
+            	    
+            	</fieldset>
+            </form>
+		</section>
+
+		<section id="section-iconfall-3"><p>Preview</p></section>
+		<section id="section-iconfall-4"><p>Settings</p></section>
+	</div>
+</div>
+<!-- /tabs -->
+
+<!-- Edition Mode -->
+<form id="promo_form" name="promo_form" ng-class="{ 'blurred': vm.selectorOpen == true }" ng-submit="vm.update( )" class="promo_form tq_floating_labels">
+<!-- For Testing Only -->
+<!-- <pre>{{vm.selectorOpen | json}}</pre> -->
+<!-- For Testing Only -->
+
+	<fieldset>
+		<legend>Promotion</legend>
+
+		<div class="icon">
+			<label class="cd-label" ng-class="{ 'float': vm.base.data.promo.description, 'label_error': promo_form.promo_description.$dirty && promo_form.promo_description.$error.required }" for="promo_description">
+				Title
+                <span ng-show="promo_form.promo_description.$dirty && promo_form.promo_description.$error.required"> required</span>
+			</label>
+            <input id="promo_description" name="promo_description" class="book" ng-class="{ 'error': promo_form.promo_description.$dirty && promo_form.promo_description.$error.required }" ng-model='vm.base.data.promo.description' type="text"  tabindex="10" required>
+	    </div> 
+
+		<div class="icon">
+			<label class="cd-label" ng-class="{ 'float': vm.base.data.promo.detail, 'label_error': promo_form.promo_detail.$dirty && promo_form.promo_detail.$error.required }" for="promo_detail">
+				Details
+                <span ng-show="promo_form.promo_detail.$dirty && promo_form.promo_detail.$error.required"> required</span>
+			</label>
+ 			<textarea id="promo_detail" name="promo_detail" class="edit" ng-class="{ 'error': promo_form.promo_detail.$dirty && promo_form.promo_detail.$error.required }" ng-model='vm.base.data.promo.detail' tabindex="20" required></textarea>
+	    </div> 
+
+		<legend>Logo</legend>
+		<div class="icon">
+            <input filepicker id='promo_img_uri' name='promo_img_uri'  data-fp-container="window" ng-model='vm.base.data.promo.img_uri' type="filepicker-dragdrop" data-fp-apikey="AhTgLagciQByzXpFGRI0Az" data-fp-mimetypes="image/*" on-success="vm.pickerOnSuccess(event.fpfile)" />
+	    </div> 
+        <img src="{{ vm.base.data.promo.img_uri }}" data-fp-pixel-round="100" data-fp-on-resize="all" width="100%" alt="{{vm.base.data.promo.description}}">
+
+		<legend>Configuration</legend>
+		<div class="icon">
+			<label class="cd-label" ng-class="{ 'float': vm.base.data.promo.coupons, 'label_error': promo_form.promo_coupons.$dirty && promo_form.promo_coupons.$error.required }" for="promo_coupons">
+				How many coupons?
+                <span ng-show="promo_form.promo_coupons.$dirty && promo_form.promo_coupons.$error.required"> required</span>
+			</label>
+            <input id="promo_coupons" name="promo_coupons" class="calculator" ng-class="{ 'error': promo_form.promo_coupons.$dirty && promo_form.promo_coupons.$error.required }" ng-model='vm.base.data.promo.coupons' type="number" min="1" max="999999" tabindex="30" required>
+            <small >( I will generate all the coupons for you )</small>
+	    </div> 
+
+		<div class="icon">
+			<label for="promo_start_date" class="cd-label float" ng-class="{ 'label_error': promo_form.promo_start_date.$dirty && promo_form.promo_start_date.$error.required }">
+				Start Date
+                <span ng-show="promo_form.promo_start_date.$dirty && promo_form.promo_start_date.$error.required"> required</span>
+			</label>
+            <input id='promo_start_date' name='promo_start_date' class='calendar' data-startend="start" data-startendelem="#promo_end_date" ng-model='vm.base.data.promo.start_date' type="text" data-field='datetime' tabindex="40" required readonly="true">
+	    </div> 
+
+		<div class="icon">
+			<label for="promo_end_date" class="cd-label float" ng-class="{ 'label_error': promo_form.promo_end_date.$dirty && promo_form.promo_end_date.$error.required }">
+				End Date
+			</label>
+            <input id='promo_end_date' name='promo_end_date' class='calendar' data-startend="end" data-startendelem="#promo_start_date" ng-model='vm.base.data.promo.end_date' type="text" data-field='datetime' tabindex="40" readonly="true">
+            <small >( If no value, then the promotion will last till coupons are all gone )</small>
+	    </div>
+	</fieldset>
+
+	<div>
+      	<input type="submit" value="Save">
+    </div>
+</form>
+
+<div id="dateTimePickerBox"></div>
+<script >
+	( function( ) {
+		[ ].slice.call( document.querySelectorAll( '.tabs' ) ).forEach( function( el ) {
+			new CBPFWTabs( el );
+		} );
+
+	} )( );
+
+    $( document ).ready( function( ) {
+        $( '#dateTimePickerBox' ).DateTimePicker( {
+            dateTimeFormat: "yyyy-MM-dd HH:mm",
+            dateFormat: "dd-MM-yyyy",
+            timeFormat: "HH:mm",
+            defaultDate: new Date( ),
+            setValueInTextboxOnEveryClick: true,
+            formatHumanDate: function( sDate ) {
+                return sDate.day + ", " + sDate.month + " " + sDate.dd + ", " + sDate.yyyy + " - " + sDate.HH + ":" + sDate.mm;
+            },
+	    	settingValueOfElement: function( sValue, dValue, oInputElement ) {
+//        		console.log( "settingValueOfElement dValue : " + dValue );
+//        		console.log( "settingValueOfElement sValue : " + sValue );
+	    	}
+	    });
+    } );
+
+    //Pop-up Dialog
+/*
+    var rewardDialog = document.getElementById("reward-dialog");
+
+    $( function( ) {
+        var moveLeft = 15;
+        var moveUp = $( rewardDialog ).outerHeight( );
+
+        $('a#btn-reward-detail').hover(function(e) {
+            $(rewardDialog).show()
+                .css('top', e.pageY - moveUp + 10)
+                .css('left', e.pageX + moveLeft)
+                .appendTo('body');
+        }, function() {
+            $(rewardDialog).hide();
+        });
+    });
+*/
+</script>

@@ -1,0 +1,72 @@
+<!-- Edition Mode -->
+<form id="promo_form" name="promo_form" ng-class="{ 'blurred': vm.selectorOpen == true }" ng-submit="vm.update( )" class="promo_form tq_floating_labels">
+<!-- For Testing Only -->
+<!-- <pre>{{vm.base.data.promo | json}}</pre> -->
+<!-- For Testing Only -->
+
+	<fieldset>
+		<div class="icon">
+			<label class="cd-label" ng-class="{ 'float': vm.base.data.promo.coupons != null, 'label_error': promo_form.promo_coupons.$dirty && promo_form.promo_coupons.$error.required }" for="promo_coupons">
+				How many coupons?
+                <span ng-show="promo_form.promo_coupons.$dirty && promo_form.promo_coupons.$error.required"> required</span>
+			</label>
+            <input id="promo_coupons" name="promo_coupons" class="calculator" ng-class="{ 'error': promo_form.promo_coupons.$dirty && promo_form.promo_coupons.$error.required }" ng-model='vm.base.data.promo.coupons' type="number" min="0" max="999999" tabindex="30" required>
+            <small >( I will generate all the coupons for you )</small>
+	    </div> 
+
+		<div class="icon">
+			<label for="promo_start_date" class="cd-label float" ng-class="{ 'label_error': promo_form.promo_start_date.$dirty && promo_form.promo_start_date.$error.required }">
+				Start Date
+                <span ng-show="promo_form.promo_start_date.$dirty && promo_form.promo_start_date.$error.required"> required</span>
+			</label>
+            <input id='promo_start_date' name='promo_start_date' class='calendar' data-startend="start" data-startendelem="#promo_end_date" ng-model='vm.base.data.promo.start_date' type="text" data-field='datetime' tabindex="40" required readonly="true">
+	    </div> 
+
+		<div class="icon">
+			<label for="promo_end_date" class="cd-label float" ng-class="{ 'label_error': promo_form.promo_end_date.$dirty && promo_form.promo_end_date.$error.required }">
+				End Date
+			</label>
+            <input id='promo_end_date' name='promo_end_date' class='calendar' data-startend="end" data-startendelem="#promo_start_date" ng-model='vm.base.data.promo.end_date' type="text" data-field='datetime' tabindex="40" readonly="true">
+            <small >( If no value, then the promotion will last till coupons are all gone )</small>
+	    </div>
+
+		<legend>Coupon Options</legend>
+        <ul class="category_list">
+            <div ng-repeat='category in vm.base.form_extra.select_category' id="{{category.challenge_category_seqid}}_parent" class="category_list_element" >
+                <li ng-style="category.checked === true && { backgroundColor: category.background_color }" 
+                    id="{{category.challenge_category_seqid}}"
+                    ng-click="vm.toggleCategory( category )"
+                    class="checkbox {{ category.fa_class }} ng-class:{ 'is-checked': category.checked }">
+                </li>
+                <div class="category_list_title" >
+                    {{category.category_title}}
+                </div>
+            </div>
+        </ul>
+
+	</fieldset>
+
+	<div>
+      	<input type="submit" value="Save">
+    </div>
+</form>
+
+<div id="dateTimePickerBox"></div>
+<script >
+    $( document ).ready( function( ) {
+        $( '#dateTimePickerBox' ).DateTimePicker( {
+            dateTimeFormat: "yyyy-MM-dd HH:mm",
+            dateFormat: "dd-MM-yyyy",
+            timeFormat: "HH:mm",
+            defaultDate: new Date( ),
+            setValueInTextboxOnEveryClick: true,
+            formatHumanDate: function( sDate ) {
+                return sDate.day + ", " + sDate.month + " " + sDate.dd + ", " + sDate.yyyy + " - " + sDate.HH + ":" + sDate.mm;
+            },
+	    	settingValueOfElement: function( sValue, dValue, oInputElement ) {
+//        		console.log( "settingValueOfElement dValue : " + dValue );
+//        		console.log( "settingValueOfElement sValue : " + sValue );
+	    	}
+	    });
+    } );
+</script>

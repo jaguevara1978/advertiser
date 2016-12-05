@@ -1,0 +1,178 @@
+<div class="signin_wrapper">
+<!-- For Testing Only -->
+<!-- <pre>{{ vm.user }}</pre> -->
+<!-- For Testing Only -->
+
+    <div class="signin_title">
+        <h1>Advertiser Zone</h1><span class="signin_subtitle">Powered by <a href='http://matoot.com' target="_blank">Matoot</a></span>
+    </div><!-- <div class="rerun"><a href="">Rerun Pen</a></div> -->
+
+    <div class="signin_container">
+        <div class="card"></div>
+
+        <div class="card">
+            <h1 class="title">Login</h1>
+
+            <form role="form" class="signin_form" id="signin_form" ng-submit="vm.login( )">
+                <div class="input-container">
+                    <input ng-model="vm.user.id" type="text" id="Username" tabindex="10" ng-required>
+                    <label for="Username">Username</label>
+                    <div class="bar"></div>
+                </div>
+
+                <div class="input-container">
+                    <input ng-model="vm.user.pwd" type="password" id="Password" tabindex="20" ng-required>
+                    <label for="Password">Password</label>
+                    <div class="bar"></div>
+                </div>
+
+                <div class="button-container">
+                    <button id="signin_submit"><span>Go</span></button>
+                </div>
+
+                <div class="footer">
+                    <a ng-click="vm.retrievePassword( )">Forgot your password?</a>
+                </div>
+            </form>
+        </div>
+
+        <div class="card alt">
+            <div id="toggle" class="toggle" ng-click="vm.signin = false">
+                <div class="toggle_pen" ng-show="!vm.loading">
+                    <i class="fa fa-user-plus"></i>
+                </div>
+                
+                <!-- Loading animation-->
+                <div class="loading" ng-show="vm.loading">
+                    <svg version="1.1" id="L7" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+                     <path fill="#fff" d="M31.6,3.5C5.9,13.6-6.6,42.7,3.5,68.4c10.1,25.7,39.2,38.3,64.9,28.1l-3.1-7.9c-21.3,8.4-45.4-2-53.8-23.3
+                      c-8.4-21.3,2-45.4,23.3-53.8L31.6,3.5z">
+                          <animateTransform 
+                             attributeName="transform" 
+                             attributeType="XML" 
+                             type="rotate"
+                             dur="2s" 
+                             from="0 50 50"
+                             to="360 50 50" 
+                             repeatCount="indefinite" />
+                      </path>
+                     <path fill="#fff" d="M42.3,39.6c5.7-4.3,13.9-3.1,18.1,2.7c4.3,5.7,3.1,13.9-2.7,18.1l4.1,5.5c8.8-6.5,10.6-19,4.1-27.7
+                      c-6.5-8.8-19-10.6-27.7-4.1L42.3,39.6z">
+                          <animateTransform 
+                             attributeName="transform" 
+                             attributeType="XML" 
+                             type="rotate"
+                             dur="1s" 
+                             from="0 50 50"
+                             to="-360 50 50" 
+                             repeatCount="indefinite" />
+                      </path>
+                     <path fill="#fff" d="M82,35.7C74.1,18,53.4,10.1,35.7,18S10.1,46.6,18,64.3l7.6-3.4c-6-13.5,0-29.3,13.5-35.3s29.3,0,35.3,13.5
+                      L82,35.7z">
+                          <animateTransform 
+                             attributeName="transform" 
+                             attributeType="XML" 
+                             type="rotate"
+                             dur="2s" 
+                             from="0 50 50"
+                             to="360 50 50" 
+                             repeatCount="indefinite" />
+                      </path>
+                    </svg>
+                </div><!-- Loading Animation -->
+            </div><!-- toggle -->
+
+            <!-- Only visible when on signup status -->
+            <div ng-show="!vm.signin">
+                <h1 class="title">Register
+                    <div class="close" ng-click="vm.signin = true">
+                        <i class="fa fa-close" ng-show="!vm.signingup"></i>
+                        <!-- Loading animation-->
+                        <svg ng-show="vm.signingup" version="1.1" id="L7" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+                         <path fill="#fff" d="M31.6,3.5C5.9,13.6-6.6,42.7,3.5,68.4c10.1,25.7,39.2,38.3,64.9,28.1l-3.1-7.9c-21.3,8.4-45.4-2-53.8-23.3
+                          c-8.4-21.3,2-45.4,23.3-53.8L31.6,3.5z">
+                              <animateTransform 
+                                 attributeName="transform" 
+                                 attributeType="XML" 
+                                 type="rotate"
+                                 dur="2s" 
+                                 from="0 50 50"
+                                 to="360 50 50" 
+                                 repeatCount="indefinite" />
+                          </path>
+                         <path fill="#fff" d="M42.3,39.6c5.7-4.3,13.9-3.1,18.1,2.7c4.3,5.7,3.1,13.9-2.7,18.1l4.1,5.5c8.8-6.5,10.6-19,4.1-27.7
+                          c-6.5-8.8-19-10.6-27.7-4.1L42.3,39.6z">
+                              <animateTransform 
+                                 attributeName="transform" 
+                                 attributeType="XML" 
+                                 type="rotate"
+                                 dur="1s" 
+                                 from="0 50 50"
+                                 to="-360 50 50" 
+                                 repeatCount="indefinite" />
+                          </path>
+                         <path fill="#fff" d="M82,35.7C74.1,18,53.4,10.1,35.7,18S10.1,46.6,18,64.3l7.6-3.4c-6-13.5,0-29.3,13.5-35.3s29.3,0,35.3,13.5
+                          L82,35.7z">
+                              <animateTransform 
+                                 attributeName="transform" 
+                                 attributeType="XML" 
+                                 type="rotate"
+                                 dur="2s" 
+                                 from="0 50 50"
+                                 to="360 50 50" 
+                                 repeatCount="indefinite" />
+                          </path>
+                        </svg>
+                    </div>
+        <div class="close signin_signup_loader" ng-show="vm.signingup">
+        </div><!-- Loading Animation -->
+                </h1>
+
+                <form role="form" class="signin_form" id="signin_form" ng-submit="vm.signup( )" autocomplete="off">
+                    <div class="input-container">
+                        <input ng-model='vm.user.data.company_name' type="text" id="company" tabindex="10" ng-required>
+                        <label for="company">Company Name</label>
+                        <div class="bar"></div>
+                    </div>
+    
+                    <div class="input-container">
+                        <input ng-model="vm.user.data.primary_email" type="text" id="email" tabindex="20" ng-required> 
+                        <label for="email">E-Mail</label>
+                        <div class="bar"></div>
+                    </div>
+    
+                    <div class="input-container">
+                        <input ng-model='vm.user.extra.password' type="password" id="Password" tabindex="30" ng-required>
+                        <label for="Password">Password</label>
+                        <div class="bar"></div>
+                    </div>
+    
+                    <div class="button-container">
+                        <button id="signup_submit"><span>Send</span></button>
+                    </div>
+                </form>
+            </div><!-- SignUp Form -->
+        </div>
+    </div><!-- SignIn Container -->
+
+    <!-- Portfolio-->
+<!--     <a id="portfolio" href="" title="Title"></a> -->
+    <!-- CodePen-->
+<!--     <a id="codepen" href="" title="Title"></a> -->
+</div>
+
+<script>
+( function( ) {
+    /* Fix Height control for SignIn form only */
+    document.getElementById( 'main_content' ).style.top = '0px';
+    /* Height control */
+
+    $( '.toggle' ).on('click', function( ) {
+        $( '.signin_container' ).stop( ).addClass( 'active' );
+    });
+    
+    $( '.close' ).on( 'click', function( ) {
+        $( '.signin_container' ).stop( ).removeClass( 'active' );
+    } );
+} ) ( );
+</script>
